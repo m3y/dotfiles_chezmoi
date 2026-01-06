@@ -1,0 +1,110 @@
+# シェルの設定
+{{ if ne .chezmoi.os "darwin" }}
+set-option -g default-shell /usr/bin/zsh
+set-option -g default-command /usr/bin/zsh
+{{ else }}
+set-option -g default-shell /bin/zsh
+set-option -g default-command /bin/zsh
+{{ end }}
+
+# プレフィックスキーを'C-b'から'C-f'に変更
+unbind C-b
+set-option -g prefix C-f
+
+# エスケープシーケンスの待ち時間を消す。
+set -s escape-time 0
+
+# 256色対応
+set -g default-terminal "tmux-256color"
+set -ag terminal-overrides ",xterm-256:RGB"
+
+# image関連のprotocolが端末で実行されるようにする。
+set -g allow-passthrough on
+
+# 全てのベルを無視
+set-option -g bell-action none
+
+# ウィンドウの自動リネームをoff
+set-window-option -g automatic-rename off
+
+# ウィンドウで動作があった場合、ステータスラインをハイライトしない
+set-window-option -g monitor-activity off
+
+# コピー、選択モードのキーバインドをviのものに変更
+set -g mode-keys vi
+
+# 設定ファイル再読み込み r
+bind-key r source-file ~/.tmux.conf\; display-message "Reloaded config!!"
+
+# 直前のウィンドウ t
+bind-key C-t last-window
+
+# デタッチ d
+bind-key d detach
+
+# 自動デタッチ
+set-option -g detach-on-destroy on
+
+# タイトル変更 A
+bind-key A command-prompt "rename-window %%"
+
+# 新ウィンドウ作成
+bind-key c new-window
+
+# ペイン間の同期
+bind-key S setw synchronize-panes on  \; display-message "synchronize-panes on"
+bind-key s setw synchronize-panes off \; display-message "synchronize-panes off"
+
+# ウィンドウ終了
+bind-key K kill-window
+
+# ペインの設定
+# ------------
+# ペイン番号表示
+bind-key i display-panes
+
+# ペインの縦分割
+bind-key - split-window -v
+
+# ペインの横分割
+bind-key | split-window -h
+
+# ペインの移動
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# ペインのトグル
+bind-key C-n select-pane -t:.+
+bind-key C-n select-pane -t:.-
+
+# ペインサイズ変更
+bind-key -r M-Up    resize-pane -U 5
+bind-key -r M-Down  resize-pane -D 5
+bind-key -r M-Left  resize-pane -L 20
+bind-key -r M-Right resize-pane -R 20
+
+# 分割していたペインそれぞれをWindowに
+bind-key b break-pane
+
+# ペイン終了
+#bind-key k kill-pane
+
+# マウス操作
+# ----------
+
+set-option -g mouse off
+bind-key m \
+  set -g mouse on \; \
+  display "Mouse: ON"
+bind-key M \
+  set -g mouse off \; \
+  display "Mouse: OFF"
+
+# ステータス行の設定
+# ------------------
+
+# 更新頻度
+set-option -g status-interval 5
+run "${XDG_CONFIG_HOME}/tmux/style.tmux"

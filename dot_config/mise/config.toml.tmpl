@@ -1,0 +1,24 @@
+[tools]
+{{ if ne .chezmoi.os "darwin" }}
+bat = "latest"
+chezmoi = "2.69.0"
+eza = "latest"
+fzf = "latest"
+go = "latest"
+gojq = "latest"
+lazygit = "latest"
+neovim = "0.11.5"
+ripgrep = "latest"
+yazi = "latest"
+zoxide = "latest"
+{{ else }}
+terraform = "1.8.1"
+awscli = "latest"
+deno = "latest"
+terraform-docs = "0.20.0"
+{{ end }}
+starship = "latest"
+gh = "2.83.2"
+delta = "latest"
+ghq = "latest"
+fd = "latest"

@@ -1,0 +1,36 @@
+[include]
+	path = ~/.gitconfig.local
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+[core]
+	autocrlf = input
+	editor = vim -c \"set fenc=utf-8\"
+[alias]
+	st = status -s
+	stat = status
+	br = branch
+	co = checkout
+	pp = pull --prune
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[push]
+	default = current
+[pull]
+	rebase = true
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[init]
+	templatedir = ~/.config/git/template/
+[ghq]
+	root = ~/.ghq/src
+[wt]
+	basedir = .wt
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/m3y/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/m3y/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
