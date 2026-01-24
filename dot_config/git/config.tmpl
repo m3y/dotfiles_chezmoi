@@ -28,9 +28,18 @@
 	root = ~/.ghq/src
 [wt]
 	basedir = .wt
+{{ if eq .chezmoi.os "darwin" }}
+[credential "https://github.com"]
+	helper = 
+	helper = !/Users/masaya.ozawa/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_macOS_arm64/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/Users/masaya.ozawa/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_macOS_arm64/bin/gh auth git-credential
+{{ else }}
 [credential "https://github.com"]
 	helper = 
 	helper = !/home/m3y/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/home/m3y/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
+{{ end }}
