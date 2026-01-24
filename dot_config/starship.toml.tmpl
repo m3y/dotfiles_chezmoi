@@ -8,23 +8,7 @@ disabled = false
 [aws]
 symbol = "󿟲 "
 #disabled = true
-{{ if eq .chezmoi.os "darwin" }}
-[terraform]
-disabled = true
 
-[custom.tf]
-command = "echo \"`sh ~/.config/starship/tf_helper.sh`\""
-when = """ find -f *.tf """
-symbol = "\ue8bd"
-symbol = ""
-
-style = "bold 105"
-format = "via [$symbol$output]($style) "
-
-[custom.fop]
-command = "fop ls | grep -e '*' | awk '{print $3}'"
-when = """ find -f fop.yaml """
-{{ end }}
 [rust]
 symbol = " "
 
