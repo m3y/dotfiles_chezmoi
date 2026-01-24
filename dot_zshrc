@@ -34,10 +34,8 @@ alias grep="rg"
 alias jq="gojq"
 alias :q="exit"
 alias date="date +%Y-%m-%dT%H:%M:%S"
-{{ if ne .chezmoi.os "darwin" }}
 alias pbcopy="xsel --clipboard --input"
 alias open="xdg-open"
-{{ end }}
 
 # common
 setopt IGNORE_EOF
@@ -53,7 +51,7 @@ setopt PUSHD_IGNORE_DUPS
 cdpath=(.. ~)
 
 function fzf-src() {
-  local selected_dir=$(ghq list --full-path | fzf -1 +m)
+  local selected_dir=$(ghq list --full-path | fzf -1 --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
     BUFFER="cd ${selected_dir}"
     zle accept-line
@@ -136,11 +134,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # tmux control
 if [ -z "${TMUX}" ]; then
-{{ if ne .chezmoi.os "darwin" }}
   /usr/bin/tmux
-{{ else }}
-  /opt/homebrew/bin/tmux
-{{ end }}
 fi
 
 # for yazi
@@ -174,6 +168,3 @@ function wt() {
 
 # start starship
 eval "$(starship init zsh)"
-
-# activate mise
-eval "$(~/.local/bin/mise activate zsh)"
