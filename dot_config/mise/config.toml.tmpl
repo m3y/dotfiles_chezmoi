@@ -1,7 +1,12 @@
 [tools]
+chezmoi = "2.69.0"
+starship = "latest"
+gh = "2.83.2"
+delta = "latest"
+ghq = "latest"
+fd = "latest"
 {{ if ne .chezmoi.os "darwin" }}
 bat = "latest"
-chezmoi = "2.69.0"
 eza = "latest"
 fzf = "latest"
 go = "latest"
@@ -17,8 +22,3 @@ awscli = "latest"
 deno = "latest"
 terraform-docs = "0.20.0"
 {{ end }}
-starship = "latest"
-gh = "2.83.2"
-delta = "latest"
-ghq = "latest"
-fd = "latest"

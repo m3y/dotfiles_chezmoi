@@ -60,7 +60,7 @@ main() {
 
   show_git_repo_and_branch="$(git_repo_and_branch_cmd)"
   current_dir="basename #{pane_current_path}"
-  
+
   tmux set -g status-left " #(${current_dir}) ${separator} #(${show_git_repo_and_branch})"
 
   # right panel
