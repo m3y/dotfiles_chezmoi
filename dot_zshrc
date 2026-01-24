@@ -166,5 +166,9 @@ function wt() {
   [[ -n "$target" ]] && git wt "$target"
 }
 
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+
 # start starship
 eval "$(starship init zsh)"
