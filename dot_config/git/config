@@ -6,7 +6,7 @@
 	branch = auto
 [core]
 	autocrlf = input
-	editor = vim -c \"set fenc=utf-8\"
+	editor = nvim -c \"set fenc=utf-8\"
 [alias]
 	st = status -s
 	stat = status
@@ -30,7 +30,7 @@
 	basedir = .wt
 [credential "https://github.com"]
 	helper = 
-	helper = !~/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
+	helper = !$(command -v gh) auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !~/.local/share/mise/installs/gh/2.83.2/gh_2.83.2_linux_amd64/bin/gh auth git-credential
+	helper = !$(command -v gh) auth git-credential
