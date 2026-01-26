@@ -11,7 +11,7 @@ export QT_IM_MODULE=fcitx
 export DOCKER_BUILDKIT=1
 
 # for fzf
-export FZF_DEFAULT_COMAND="fd --type f --hidden --follow --exclude .git | sort -r"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git | sort -r"
 export FZF_DEFAULT_OPTS="--ansi -e --prompt='QUERY> ' --layout=reverse --border=rounded --height 100%"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid --line-range :100 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza {} -h -T -F --no-user --no-time --no-filesize --no-permissions --long | head -200'"

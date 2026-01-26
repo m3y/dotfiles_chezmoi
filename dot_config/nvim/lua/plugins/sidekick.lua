@@ -7,6 +7,16 @@ return {
 				backend = "tmux",
 				enabled = false,
 			},
+			win = {
+				layout = "right",
+				split = { width = 0 },
+				config = function(terminal)
+					terminal.opts.win = terminal.opts.win or {}
+					terminal.opts.win.split = terminal.opts.win.split or {}
+
+					terminal.opts.win.split.width = math.floor(vim.o.columns * 0.5)
+				end,
+			},
 		},
 		context = {
 			current_buffer = true,
