@@ -14,6 +14,7 @@ opt.cmdheight = 0
 opt.laststatus = 0
 opt.statusline = "-"
 opt.fillchars:append({ stl = "-", stlnc = "-" })
+opt.splitright = true
 
 -- Searching
 opt.incsearch = true

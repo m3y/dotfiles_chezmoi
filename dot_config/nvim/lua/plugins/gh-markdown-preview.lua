@@ -48,6 +48,7 @@ return {
 		end
 
 		vim.api.nvim_create_user_command("GhMarkdownPreviewToggle", toggle, {})
+
 		vim.keymap.set("n", "<leader>pm", "<cmd>GhMarkdownPreviewToggle<CR>", {
 			desc = "Toggle gh markdown-preview",
 			silent = true,
