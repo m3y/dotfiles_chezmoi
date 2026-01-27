@@ -36,7 +36,7 @@ return {
 					{ icon, guifg = icon_color },
 					" ",
 					{ filename, gui = readonly and "italic" or nil },
-					modified and { " ●", guifg = "#e86671" } or nil, --modified mark
+					modified and { " ●", guifg = "#e86671" } or nil, -- modified mark
 					readonly and { " ", guifg = "#e5c07b" } or nil, -- lock mark
 				}
 			end,
