@@ -32,7 +32,30 @@ return {
 				local modified = vim.bo[buf].modified
 				local readonly = vim.bo[buf].readonly or not vim.bo[buf].modifiable
 
+				local function diag_label()
+					local severities = {
+						{ key = "ERROR", icon = "E", hl = "DiagnosticSignError" },
+						{ key = "WARN", icon = "W", hl = "DiagnosticSignWarn" },
+					}
+
+					local out = {}
+					for _, s in ipairs(severities) do
+						local n = #vim.diagnostic.get(props.buf, {
+							severity = vim.diagnostic.severity[s.key],
+						})
+						if n > 0 then
+							table.insert(out, { s.icon .. n .. " ", group = s.hl })
+						end
+					end
+
+					if #out > 0 then
+						table.insert(out, { "| " })
+					end
+					return out
+				end
+
 				return {
+					{ diag_label() },
 					{ icon, guifg = icon_color },
 					" ",
 					{ filename, gui = readonly and "italic" or nil },
