@@ -21,27 +21,13 @@ return {
 		context = {
 			current_buffer = true,
 			selection = true,
-			project_root = true,
+			surrounding_lines = {
+				befor = 30,
+				after = 30,
+			},
 		},
 	},
 	keys = {
-		{
-			"<tab>",
-			function()
-				-- if there is a next edit, jump to it, otherwise apply it if any
-				if not require("sidekick").nes_jump_or_apply() then
-					return "<Tab>" -- fallback to normal tab
-				end
-			end,
-			expr = true,
-			desc = "Goto/Apply Next Edit Suggestion",
-		},
-		{
-			"<c-.>",
-			function() require("sidekick.cli").toggle() end,
-			desc = "Sidekick Toggle",
-			mode = { "n", "t", "i", "x" },
-		},
 		{
 			"<leader>aa",
 			function() require("sidekick.cli").toggle() end,
@@ -84,9 +70,14 @@ return {
 		},
 		-- Example of a keybinding to open Claude directly
 		{
-			"<leader>ac",
+			"<leader>al",
 			function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
 			desc = "Sidekick Toggle Claude",
+		},
+		{
+			"<leader>as",
+			function() require("sidekick.cli").toggle({ name = "codex", focus = true }) end,
+			desc = "Sidekick Toggle Codex",
 		},
 	},
 }

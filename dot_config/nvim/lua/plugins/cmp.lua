@@ -1,0 +1,55 @@
+return {
+	"hrsh7th/nvim-cmp",
+	event = "InsertEnter",
+	dependencies = {
+		"onsails/lspkind.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+	},
+	config = function()
+		local cmp = require("cmp")
+		local lspkind = require("lspkind")
+
+		vim.opt.completeopt = { "menu", "munuone", "noselect" }
+
+		cmp.setup({
+			formatting = {
+				format = lspkind.cmp_format({
+					mode = "symbol_text",
+					maxwidth = 50,
+					ellipsis_char = "...",
+				})
+			},
+
+			mapping = cmp.mapping.preset.insert({
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping.abort(),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+				["<Tab>"] = cmp.mapping(function(failback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+						failback()
+					end
+				end, { "i", "s" }),
+
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					else
+						failback()
+					end
+				end, {"i", "s" })
+			}),
+
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "path" },
+				{ name = "buffer" },
+			}),
+		}),
+	end,
+}
+
