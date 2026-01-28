@@ -41,7 +41,7 @@ return {
 					else
 						fallback()
 					end
-				end, { "i", "s" })
+				end, { "i", "s" }),
 			}),
 
 			sources = cmp.config.sources({
@@ -50,5 +50,5 @@ return {
 				{ name = "buffer" },
 			}),
 		})
-	end
+	end,
 }
