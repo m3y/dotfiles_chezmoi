@@ -11,7 +11,7 @@ return {
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 
-		vim.opt.completeopt = { "menu", "munuone", "noselect" }
+		vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 		cmp.setup({
 			formatting = {
@@ -19,7 +19,7 @@ return {
 					mode = "symbol_text",
 					maxwidth = 50,
 					ellipsis_char = "...",
-				})
+				}),
 			},
 
 			mapping = cmp.mapping.preset.insert({
@@ -27,11 +27,11 @@ return {
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 
-				["<Tab>"] = cmp.mapping(function(failback)
+				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
 					else
-						failback()
+						fallback()
 					end
 				end, { "i", "s" }),
 
@@ -39,9 +39,9 @@ return {
 					if cmp.visible() then
 						cmp.select_prev_item()
 					else
-						failback()
+						fallback()
 					end
-				end, {"i", "s" })
+				end, { "i", "s" })
 			}),
 
 			sources = cmp.config.sources({
@@ -49,7 +49,6 @@ return {
 				{ name = "path" },
 				{ name = "buffer" },
 			}),
-		}),
-	end,
+		})
+	end
 }
-
