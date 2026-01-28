@@ -15,7 +15,7 @@ return {
 			{ "gr", vim.lsp.buf.references, desc = "References" },
 			{ "K", vim.lsp.buf.hover, desc = "Hover Documentation" },
 			{ "<leader>ea", function()
-				vim.diagnostics.open_float(nil, {
+				vim.diagnostic.open_float(nil, {
 					scope = "buffer",
 					border = "rounded",
 					source = "always",
@@ -30,7 +30,9 @@ return {
 		opts = {
 			servers = {
 				lua_ls = {
-					settings = { Lua = { diagnostics = { globals = { "vim" } } }, },
+					settings = {
+						Lua = { diagnostics = { globals = { "vim" } } },
+					},
 				},
 				stylua = {},
 				pyright = {},
@@ -56,13 +58,13 @@ return {
 			local caps = require("cmp_nvim_lsp").default_capabilities()
 			vim.lsp.config("*", { capabilities = caps })
 
-			for server_name, server_ops in pairs(opts.servers) do
+			for server_name, server_opts in pairs(opts.servers) do
 				if server_name ~= "rust_analyzer" then
 					vim.lsp.config(server_name, server_opts)
 				end
 			end
 
-			vim.lsp.config("pylight", {
+			vim.lsp.config("pyright", {
 				root_markers = { "uv.lock", ".venv", "pyproject.toml", ".git" },
 				settings = {
 					python = {
