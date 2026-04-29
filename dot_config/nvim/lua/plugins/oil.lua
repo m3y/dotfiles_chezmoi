@@ -4,7 +4,7 @@ return {
 	keys = {
 		{ "-", "<cmd>Oil --float<CR>", desc = "Oil (float)" },
 		{
-			"<C-x>",
+			"<C-h>",
 			function()
 				require("oil").select({ horizontal = true })
 			end,

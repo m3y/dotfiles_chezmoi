@@ -32,36 +32,60 @@ return {
 				local modified = vim.bo[buf].modified
 				local readonly = vim.bo[buf].readonly or not vim.bo[buf].modifiable
 
-				local function diag_label()
+				local function diag_segments()
 					local severities = {
 						{ key = "ERROR", icon = "E", hl = "DiagnosticSignError" },
 						{ key = "WARN", icon = "W", hl = "DiagnosticSignWarn" },
 					}
 
-					local out = {}
+					local segs = {}
 					for _, s in ipairs(severities) do
-						local n = #vim.diagnostic.get(props.buf, {
+						local n = #vim.diagnostic.get(buf, {
 							severity = vim.diagnostic.severity[s.key],
 						})
 						if n > 0 then
-							table.insert(out, { s.icon .. n .. " ", group = s.hl })
+							table.insert(segs, { s.icon .. n .. " ", group = s.hl })
 						end
 					end
 
-					if #out > 0 then
-						table.insert(out, { "| " })
+					if #segs > 0 then
+						table.insert(segs, { "| " })
 					end
-					return out
+					return segs
 				end
 
-				return {
-					{ diag_label() },
-					{ icon, guifg = icon_color },
-					" ",
-					{ filename, gui = readonly and "italic" or nil },
-					modified and { " ●", guifg = "#e86671" } or nil, -- modified mark
-					readonly and { " ", guifg = "#e5c07b" } or nil, -- lock mark
-				}
+				local function macro_segment()
+					local rec = vim.fn.reg_recording()
+					if rec ~= "" then
+						return { "REC @" .. rec, guifg = "#ff5555", gui = "bold" }
+					end
+
+					return nil
+				end
+
+				local parts = {}
+
+				vim.list_extend(parts, diag_segments())
+
+				table.insert(parts, { icon, guifg = icon_color })
+				table.insert(parts, " ")
+				table.insert(parts, { filename, gui = readonly and "italic" or nil })
+
+				if modified then
+					table.insert(parts, { " ●", guifg = "#e86671" })
+				end
+
+				if readonly then
+					table.insert(parts, { " ", guifg = "#e5c07b" })
+				end
+
+				local m = macro_segment()
+				if m then
+					table.insert(parts, { " | " })
+					table.insert(parts, m)
+				end
+
+				return parts
 			end,
 		}
 	end,
